@@ -41,8 +41,9 @@ export default function PackageReservationDialog({
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (value.startsWith("+63") && value.length <= 13) {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+    const numericValue = value.replace(/[^\d+]/g, "");
+    if (numericValue.startsWith("+63") && numericValue.length <= 13) {
+      setFormData((prev) => ({ ...prev, [name]: numericValue }));
     }
   };
 
@@ -188,7 +189,7 @@ export default function PackageReservationDialog({
                     onChange={handlePhoneChange}
                     className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-secondary"
                     placeholder="+639XXXXXXXXX"
-                    pattern="\+639\d{9}"
+                    pattern="\+63[0-9]{10}"
                   />
                 </div>
               </>
@@ -219,7 +220,7 @@ export default function PackageReservationDialog({
                     onChange={handlePhoneChange}
                     className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-secondary"
                     placeholder="+639XXXXXXXXX"
-                    pattern="\+639\d{9}"
+                    pattern="\+63[0-9]{10}"
                   />
                 </div>
               </>
