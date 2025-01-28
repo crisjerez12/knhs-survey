@@ -78,8 +78,8 @@ export default function About() {
 
           <motion.div variants={itemVariants} className="h-[400px]">
             <MapContainer
-              center={[5.861192, 124.9941566]}
-              zoom={17}
+              center={[5.861218, 124.996742]}
+              zoom={20}
               scrollWheelZoom={false}
               className="h-full w-full rounded-lg shadow-lg"
             >
@@ -87,7 +87,7 @@ export default function About() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker position={[5.861192, 124.9941566]}>
+              <Marker position={[5.861218, 124.996742]}>
                 <Popup>
                   <div className="font-quicksand">
                     <h3 className="font-medium text-lg mb-2">Lechem Cuizine</h3>
