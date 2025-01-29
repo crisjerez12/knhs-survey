@@ -144,6 +144,7 @@ const MyDocument: React.FC<MyDocumentProps> = ({ reservationData }) => (
           <Text style={styles.contactInfo}>
             Email : judelynbolivar5@gmail.com
           </Text>
+          <View style={styles.divider} />
           <Text style={styles.receiptNumber}>
             RECEIPT NUMBER: {reservationData.id}
           </Text>
