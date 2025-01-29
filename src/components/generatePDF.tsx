@@ -8,9 +8,10 @@ import {
 } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
 import { pdf } from "@react-pdf/renderer";
+import type React from "react";
 
-// Define interfaces for our data structures
 interface ReservationData {
+  id: number;
   location: string;
   mobile_number: string;
   name: string;
@@ -19,169 +20,199 @@ interface ReservationData {
   pax: string;
   reservation_date: string;
   total_price: number;
-}
-
-interface Item {
-  name: string;
-  price: string;
-  quantity: number;
+  created_at: Date;
 }
 
 const styles = StyleSheet.create({
   page: {
-    flexDirection: "column" as const,
+    flexDirection: "column",
     backgroundColor: "#ffffff",
-    padding: 20,
-  },
-  section: {
-    margin: 5,
-    padding: 5,
-    flexGrow: 1,
+    padding: 15, // Reduced padding for A6
+    fontFamily: "Helvetica",
+    width: "105mm", // A6 width
+    height: "148mm", // A6 height
   },
   header: {
-    fontSize: 16,
+    flexDirection: "row",
     marginBottom: 10,
-    textAlign: "center" as const,
-    color: "#4a5568",
+    borderWidth: 0.5,
+    borderColor: "#000",
+    padding: 8,
   },
-  subheader: {
-    fontSize: 12,
-    marginBottom: 5,
+  headerContent: {
+    flex: 1,
+    marginLeft: 8,
   },
-  text: {
+  image: {
+    width: 30, // Reduced size for A6
+    height: 30,
+  },
+  establishmentName: {
+    fontSize: 8, // Reduced font size for A6
+    fontWeight: "bold",
+    marginBottom: 2,
+  },
+  location: {
+    fontSize: 6,
+    marginBottom: 1,
+  },
+  contactInfo: {
+    fontSize: 6,
+    marginBottom: 1,
+  },
+  receiptNumber: {
+    fontSize: 7,
+    marginTop: 1,
+  },
+  divider: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#000",
+    borderBottomStyle: "dashed",
+    marginVertical: 6,
+  },
+  sectionTitle: {
     fontSize: 8,
+    fontWeight: "bold",
+    marginBottom: 4,
+    textTransform: "uppercase",
+  },
+  infoContainer: {
+    marginBottom: 6,
+  },
+  infoRow: {
+    flexDirection: "row",
     marginBottom: 3,
   },
-  logo: {
-    width: 50,
-    height: 50,
-    marginBottom: 10,
-    alignSelf: "center" as const,
+  infoLabel: {
+    fontSize: 7,
+    width: "40%",
+    borderBottomWidth: 0.25,
+    borderBottomColor: "#ccc",
+    paddingBottom: 1,
   },
-  table: {
-    width: "auto",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
+  infoValue: {
+    fontSize: 7,
+    flex: 1,
+    borderBottomWidth: 0.25,
+    borderBottomColor: "#ccc",
+    paddingBottom: 1,
   },
-  tableRow: {
-    margin: "auto",
-    flexDirection: "row" as const,
+  packageDetails: {
+    marginBottom: 6,
   },
-  tableCol: {
-    width: "25%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
+  footer: {
+    marginTop: 8,
+    alignItems: "center",
+    paddingTop: 6,
   },
-  tableCell: {
-    margin: "auto",
-    marginTop: 3,
+  footerText: {
     fontSize: 6,
+    textAlign: "center",
+    marginBottom: 1,
+    fontFamily: "Helvetica",
+  },
+  officialReceipt: {
+    fontSize: 5,
+    textAlign: "center",
+    marginTop: 4,
+    fontStyle: "italic",
+    borderTopWidth: 0.5,
+    borderTopColor: "#000",
+    paddingTop: 2,
   },
 });
 
 interface MyDocumentProps {
   reservationData: ReservationData;
-  items?: Item[]; //Added optional items
-  total?: number; //Added optional total
 }
 
-const MyDocument: React.FC<MyDocumentProps> = ({
-  reservationData,
-  items,
-  total,
-}) => (
+const MyDocument: React.FC<MyDocumentProps> = ({ reservationData }) => (
   <Document>
-    <Page size="A6" style={styles.page}>
-      <Image src="/logo.png" style={styles.logo} />
-      <Text style={styles.header}>Lechem-Cuizine Reservation Receipt</Text>
-      <View style={styles.section}>
-        <Text style={styles.subheader}>Reservation Information</Text>
-        <Text style={styles.text}>
-          Date: {reservationData.reservation_date}
-        </Text>
-        <Text style={styles.text}>Name: {reservationData.name}</Text>
-        <Text style={styles.text}>Location: {reservationData.location}</Text>
-        <Text style={styles.text}>Mobile: {reservationData.mobile_number}</Text>
-        <Text style={styles.text}>Notes: {reservationData.notes || "N/A"}</Text>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.subheader}>Package Details</Text>
-        <Text style={styles.text}>Package: {reservationData.package}</Text>
-        <Text style={styles.text}>Number of Guests: {reservationData.pax}</Text>
-        <Text style={styles.text}>
-          Total Price: ₱{reservationData.total_price.toLocaleString()}
-        </Text>
-      </View>
-      {items && ( //Conditional rendering of order details
-        <View style={styles.section}>
-          <Text style={styles.subheader}>Order Details</Text>
-          <View style={styles.table}>
-            <View style={styles.tableRow}>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>Item</Text>
-              </View>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>Price</Text>
-              </View>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>Quantity</Text>
-              </View>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>Total</Text>
-              </View>
-            </View>
-            {items.map((item, index) => (
-              <View style={styles.tableRow} key={index}>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{item.name}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>
-                    {item.price.replace("₱", "")}
-                  </Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{item.quantity}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>
-                    {(
-                      Number.parseFloat(
-                        item.price.replace("₱", "").replace(",", "")
-                      ) * item.quantity
-                    ).toLocaleString()}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
-          {total && (
-            <Text
-              style={[
-                styles.text,
-                { marginTop: 10, fontWeight: "bold" as const },
-              ]}
-            >
-              Total: {total.toLocaleString()} pesos
-            </Text>
-          )}
+    <Page size={[297.64, 419.53]} style={styles.page}>
+      {" "}
+      {/* A6 dimensions in points */}
+      <View style={styles.header}>
+        <Image style={styles.image} src="/logo.png" />
+        <View style={styles.headerContent}>
+          <Text style={styles.establishmentName}>
+            LECHEM CUIZINE RESERVATION RECEIPT
+          </Text>
+          <Text style={styles.location}>
+            POBLACION, MAASIM, SARANGANI PROVINCE
+          </Text>
+          <Text style={styles.contactInfo}>Contact #: +63 909 1730 091</Text>
+          <Text style={styles.contactInfo}>
+            Email : judelynbolivar5@gmail.com
+          </Text>
+          <Text style={styles.receiptNumber}>
+            RECEIPT NUMBER: {reservationData.id}
+          </Text>
         </View>
-      )}
+      </View>
+      <View style={styles.divider} />
+      <View style={styles.infoContainer}>
+        <Text style={styles.sectionTitle}>RESERVATION INFORMATION</Text>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Reservation date:</Text>
+          <Text style={styles.infoValue}>
+            {reservationData.reservation_date}
+          </Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Name:</Text>
+          <Text style={styles.infoValue}>{reservationData.name}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Location:</Text>
+          <Text style={styles.infoValue}>{reservationData.location}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Mobile Number:</Text>
+          <Text style={styles.infoValue}>{reservationData.mobile_number}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Allergies/Notes:</Text>
+          <Text style={styles.infoValue}>{reservationData.notes}</Text>
+        </View>
+      </View>
+      <View style={styles.divider} />
+      <View style={styles.packageDetails}>
+        <Text style={styles.sectionTitle}>PACKAGE DETAILS</Text>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Package:</Text>
+          <Text style={styles.infoValue}>{reservationData.package}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Number of Guest:</Text>
+          <Text style={styles.infoValue}>{reservationData.pax}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Total Price:</Text>
+          <Text style={styles.infoValue}>
+            {reservationData.total_price.toLocaleString()} Pesos
+          </Text>
+        </View>
+      </View>
+      <View style={styles.divider} />
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>Please Come and Visit</Text>
+        <Text style={styles.footerText}>Our Store For Your Payment.</Text>
+        <Text style={styles.footerText}>Thank You and Please Reserve</Text>
+        <Text style={styles.footerText}>Again</Text>
+        <Text style={styles.officialReceipt}>
+          This serves as your OFFICIAL RECEIPT
+        </Text>
+      </View>
     </Page>
   </Document>
 );
 
 export const generatePDF = async (
-  reservationData: ReservationData,
-  items?: Item[],
-  total?: number
+  reservationData: ReservationData
 ): Promise<void> => {
+  console.log(reservationData);
   const blob = await pdf(
-    <MyDocument reservationData={reservationData} items={items} total={total} />
+    <MyDocument reservationData={reservationData} />
   ).toBlob();
   saveAs(blob, "Lechem-Cuizine-Reservation-Receipt.pdf");
 };

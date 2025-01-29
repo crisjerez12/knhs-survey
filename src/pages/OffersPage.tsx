@@ -57,9 +57,16 @@ export default function OffersPage() {
   };
 
   const handleReservationSubmit = async (reservationData: any) => {
-    await supabase.from("online_reservations").insert(reservationData);
+    const { data, error } = await supabase
+      .from("online_reservations")
+      .insert(reservationData)
+      .select("*");
+    if (error) {
+      toast.error("Reservation Failed to submit!");
+      return;
+    }
     toast.success("Reservation submitted successfully!");
-    await generatePDF(reservationData);
+    await generatePDF(data[0]);
     setShowReservationDialog(false);
     setSelectedPackage(null);
   };

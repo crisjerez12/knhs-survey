@@ -23,30 +23,6 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
-
-      {/* Fixed CTA Button with jumping animation */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="fixed bottom-8 right-8 z-[60]"
-      >
-        <motion.a
-          href="/offers"
-          className="btn btn-primary shadow-xl hover:shadow-lg"
-          animate={{
-            y: [0, -10, 0],
-          }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          }}
-        >
-          Reserve Now
-        </motion.a>
-      </motion.div>
     </section>
   );
 }

@@ -22,7 +22,7 @@ export default function About() {
   };
 
   return (
-    <section className="py-16 bg-white" id="about">
+    <section className="py-16 bg-white z-10" id="about">
       <div className="container mx-auto px-4">
         <motion.div
           variants={containerVariants}
