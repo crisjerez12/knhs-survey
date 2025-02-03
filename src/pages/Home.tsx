@@ -45,19 +45,6 @@ export default function Home() {
       <motion.div variants={itemVariants}>
         <Testimonials />
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="fixed bottom-8 right-8 z-[60]"
-      >
-        <motion.a
-          href="/packages"
-          className="btn btn-primary shadow-xl hover:shadow-lg"
-        >
-          Reserve Now
-        </motion.a>
-      </motion.div>
     </motion.main>
   );
 }

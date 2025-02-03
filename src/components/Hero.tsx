@@ -4,7 +4,7 @@ import { MapPin } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative min-h-screen pt-20 flex items-center bg-gradient-to-b from-green-50 to-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 flex justify-center flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -19,8 +19,21 @@ export default function Hero() {
           </p>
           <div className="flex items-center justify-center space-x-2 text-gray-500 mb-8">
             <MapPin className="w-5 h-5" />
-            <span>Maasim, Sarangani Province, Philippines</span>
+            <span>Poblacion, Maasim, Sarangani Province, Philippines</span>
           </div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className=" "
+        >
+          <motion.a
+            href="/packages"
+            className="btn btn-primary shadow-xl px-20 py-4 text-xl hover:shadow-lg"
+          >
+            Reserve Now
+          </motion.a>
         </motion.div>
       </div>
     </section>
