@@ -235,10 +235,7 @@ export default function PackageReservationDialog({
                 name="pax"
                 value={formData.pax}
                 onChange={(e) => {
-                  const value = Math.max(
-                    25,
-                    Number.parseInt(e.target.value) || 25
-                  );
+                  const value = Number.parseInt(e.target.value);
                   setFormData((prev) => ({ ...prev, pax: value.toString() }));
                 }}
                 className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-secondary"
