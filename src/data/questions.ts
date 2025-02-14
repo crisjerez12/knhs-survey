@@ -1,0 +1,203 @@
+export const clientTypeQuestions = [
+  {
+    id: "clientType",
+    text: "Client Type",
+    options: [
+      "Citizen",
+      "Business",
+      "Government (Employee)",
+      "Government (Another Agency)",
+    ],
+    type: "radio",
+    required: true,
+  },
+  {
+    id: "sex",
+    text: "Sex",
+    options: ["Male", "Female"],
+    type: "radio",
+    required: true,
+  },
+  {
+    id: "age",
+    text: "Age",
+    options: [],
+    type: "number",
+    required: true,
+  },
+  {
+    id: "region",
+    text: "Region of Residence",
+    options: [
+      "Region 1",
+      "Region 2",
+      "Region 3",
+      "Region 4A",
+      "Region 4B",
+      "Region 5",
+      "Region 6",
+      "Region 7",
+      "Region 8",
+      "Region 9",
+      "Region 10",
+      "Region 11",
+      "Region 12",
+      "Region 13",
+    ],
+    type: "select",
+    required: true,
+  },
+  {
+    id: "serviceAvailed",
+    text: "Service Availed",
+    options: [],
+    type: "text",
+    required: true,
+  },
+];
+
+export const citizenCharterQuestions = {
+  cc1: {
+    id: "cc1",
+    text: "Which of the following best describes your awareness of CC (Citizen's Charter)?",
+    options: [
+      "I know what a Citizen's Charter is and I saw this office's CC",
+      "I know what a Citizen's Charter is but I did NOT see this office's CC",
+      "I learned of the Citizen's Charter only when I saw this office's Citizen's Charter",
+      "I do not know what a Citizen's Charter is and I did not see one in this office",
+    ],
+    required: true,
+  },
+  cc2: {
+    id: "cc2",
+    text: "If Aware of CC (answered 1-3 in CC1), would you say that the CC of this office was...?",
+    options: [
+      "Easy to see",
+      "Somewhat easy to see",
+      "Difficult to see",
+      "Not visible at all",
+      "Not applicable",
+    ],
+  },
+  cc3: {
+    id: "cc3",
+    text: "If aware of CC (answered codes 1-3 in CC1), how much did the CC help you in your transaction?",
+    options: [
+      "Helped very much",
+      "Somewhat helped",
+      "Did not help",
+      "Not applicable",
+    ],
+  },
+};
+
+export const satisfactionQuestions = [
+  {
+    id: "satisfaction1",
+    text: "I am satisfied with the service that I availed.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+  {
+    id: "satisfaction2",
+    text: "I spent a reasonable amount of time for my transaction.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+  {
+    id: "satisfaction3",
+    text: "The office followed the transaction's requirements and steps based on the information provided.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+  {
+    id: "satisfaction4",
+    text: "The steps (including payment) I needed to do for my transaction were easy and simple.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+  {
+    id: "satisfaction5",
+    text: "I easily found information about my transaction from the office or its website.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+  {
+    id: "satisfaction6",
+    text: "I paid a reasonable amount of fees for my transaction.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+  {
+    id: "satisfaction7",
+    text: "I feel the office was fair to everyone or WALANG PALAKASAN, during my transaction.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+  {
+    id: "satisfaction8",
+    text: "I was treated courteously by the staff, and (if ask for help) the staff was helpful.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+  {
+    id: "satisfaction9",
+    text: "I got what I needed from the government office, or (if denied) denial of request was sufficiently explained to me.",
+    options: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+      "N/A",
+    ],
+  },
+];
